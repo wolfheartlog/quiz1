@@ -1,0 +1,52 @@
+1. RDBMS
+
+#create project
+composer create-project --prefer-dist laravel/lumen .
+
+#masuk ke dalam container
+docker exec -it lumen_php bash
+
+#menambahkan generator
+cd ke folder
+composer require flipbox/lumen-generator
+
+#menambahkan route
+$router->group(['prefix' => 'api/v1/testing'], function() use ($router) {
+$router->get('/', ['uses' => 'UserController@index']);
+$router->post('/', ['uses' => 'UserController@index']);
+$router->get('/{id}', ['uses' => 'UserController@index']);
+});
+
+#menambahkan model
+protected $fillable = [
+'id', 'title', 'harga'
+];
+
+#menambahkan controller
+use Illuminate\Support\Facades\DB;
+
+public function index()
+{
+$trans= DB::connection('mysql')->table('users')->get();
+return response()->json($trans);
+}
+
+
+
+2. MongoDB
+use quizcollection
+
+#membuat collection
+db.createCollection("kategori")
+
+#membuat isi collection
+db.kategori_insert({"_id":"1", "category":"a"})
+
+#membaca collection
+db.kategori.find({"_id":"1"})
+
+#update collection
+db.kategori.update({category:"a"}), {$set{'category':'b'}})
+
+#menghapus data collection
+db.kategori.remove({'category':'b'})
